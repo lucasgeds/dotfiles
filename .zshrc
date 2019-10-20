@@ -101,33 +101,13 @@ fi
 alias be="bundle exec"
 alias ssh_tunnel_db='ssh -fNL 12343:remote_db:5432 host'
 
-set termguicolors
-
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+
+# Enable history in IEX through Erlang(OTP)
+export ERL_AFLAGS="-kernel shell_history enabled"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 . "/usr/local/opt/asdf/asdf.sh"
-
-export PATH="/Users/lguedes/.rbenv/shims:${PATH}"
-export RBENV_SHELL=zsh
-source '/usr/local/Cellar/rbenv/1.1.0/libexec/../completions/rbenv.zsh'
-command rbenv rehash 2>/dev/null
-rbenv() {
-  local command
-  command="$1"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
-
-  case "$command" in
-  rehash|shell)
-    eval "$(rbenv "sh-$command" "$@")";;
-  *)
-    command rbenv "$command" "$@";;
-  esac
-}
-
-# Enable history in IEX through Erlang(OTP)
-export ERL_AFLAGS="-kernel shell_history enabled"
