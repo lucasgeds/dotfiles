@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/lguedes/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -100,14 +100,15 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias be="bundle exec"
 alias ssh_tunnel_db='ssh -fNL 12343:remote_db:5432 host'
+set termguicolors
 
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
+. "/usr/local/opt/asdf/asdf.sh"
+
 # Enable history in IEX through Erlang(OTP)
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-. "/usr/local/opt/asdf/asdf.sh"
