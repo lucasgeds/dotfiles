@@ -1,6 +1,16 @@
 if has('neovim')
+  if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
   call plug#begin('~/.local/share/nvim/plugged')
 else
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
   call plug#begin('~/.vim/plugged')
 endif
   Plug 'scrooloose/nerdtree'
@@ -21,8 +31,7 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
-" set guifont=*
-" set termguicolors
+" set guifont=* " set termguicolors
 set background=dark
 
 colorscheme gruvbox

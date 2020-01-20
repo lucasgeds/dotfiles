@@ -106,9 +106,10 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
-. "/usr/local/opt/asdf/asdf.sh"
-
 # Enable history in IEX through Erlang(OTP)
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
