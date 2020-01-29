@@ -31,8 +31,13 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
-" set guifont=* " set termguicolors
 set background=dark
+set guifont=*
+set termguicolors
+" set t_Co=256
+
+" highlight Normal ctermbg=NONE
+" highlight nonText ctermbg=NONE
 
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
