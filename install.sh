@@ -16,10 +16,18 @@ fi
 echo "Symlinking ~/.gitignore..."
 ln -sf $script_dir/.gitignore ~/.gitignore
 
+if [ -f ~/.asdfrc ]; then
+  echo "Moving ~/.asdfrc to ~/.asdfrc.bkp..."
+  mv ~/.asdfrc ~/.asdfrc.bkp
+fi
+echo "Symlinking ~/.asdfrc..."
+ln -sf $script_dir/.asdfrc ~/.asdfrc
+
 if [ -f ~/.tool-versions ]; then
   echo "Moving ~/.tool-versions to ~/.tool-versions.bkp..."
   mv ~/.tool-versions ~/.tool-versions.bkp
 fi
+
 echo "Symlinking ~/.tool-versions..."
 ln -sf $script_dir/.tool-versions ~/.tool-versions
 

@@ -70,6 +70,12 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit
+compinit
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -99,12 +105,17 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias be="bundle exec"
-alias ssh_tunnel_db='ssh -fNL 12343:remote_db:5432 host'
-set termguicolors
 
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/opt/local/bin:$PATH"
+export PATH="/opt/local/sbin:$PATH"
+export PATH="/usr/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
+# vim-iced utility command
+export PATH="$PATH:$HOME/.vim/plugged/vim-iced/bin"
 
 # Enable history in IEX through Erlang(OTP)
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -112,4 +123,9 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 . $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+# . $HOME/.asdf/completions/asdf.bash
+
+export GPG_TTY=$(tty)
+export PINENTRY_USER_DATA="USE_CURSES=1"
+
+source $HOME/.bash_profile
