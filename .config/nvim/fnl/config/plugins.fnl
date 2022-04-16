@@ -30,24 +30,19 @@
   ;; have packer manage itself
   :wbthomason/packer.nvim {:mod :packer}
 
-  ;; nvim config and plugins in Fennel
-  :Olical/aniseed {}
+  ;; dependencies
+  :nvim-lua/plenary.nvim {} ; useful lua functions used by lots of plugins
+  :nvim-lua/popup.nvim   {} ; an implementation of the popup api from vim in neovim
+  :olical/aniseed        {} ; nvim config and plugins in fennel
 
   ;; colorscheme
-  :NLKNguyen/papercolor-theme  {:mod :colorscheme}
-  :morhetz/gruvbox             {:mod :colorscheme}
-  :projekt0n/github-nvim-theme {:mod :colorscheme}
+  :morhetz/gruvbox            {:mod :colorscheme}
+  :nlknguyen/papercolor-theme {:mod :colorscheme}
 
   ;; text manipulation
   :junegunn/vim-easy-align {:mod :easy-align}
-  :numToStr/Comment.nvim   {:mod :comment}
+  :numtostr/comment.nvim   {:mod :comment}
 
   :lewis6991/impatient.nvim {}
   )
-
-;; autocommand that reloads neovim whenever you save the plugins.lua file
-;; (nvim.ex.augroup :packer_user_config)
-;; (nvim.ex.autocmd_)
-;; (nvim.ex.augroup :END)
-;; (nvim.ex.autocmd "BufWritePost plugins.fnl source plugins.lua | PackerSync")
 
