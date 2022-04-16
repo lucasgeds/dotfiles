@@ -102,9 +102,11 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
+alias zshconfig="$EDITOR ~/.zshrc"
 alias be="bundle exec"
+alias grbom="git fetch && git rebase origin/$(git_main_branch)"
+alias grohm="git fetch && git reset --hard origin/$(git_main_branch)"
 
 export PATH="/opt/local/bin:$PATH"
 export PATH="/opt/local/sbin:$PATH"
@@ -112,10 +114,9 @@ export PATH="/usr/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 export PATH="$HOME/bin:$PATH"
-
-# vim-iced utility command
-export PATH="$PATH:$HOME/.vim/plugged/vim-iced/bin"
+export PATH="$HOME/.emacs.d/bin:$PATH"
 
 # Enable history in IEX through Erlang(OTP)
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -123,9 +124,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 . $HOME/.asdf/asdf.sh
-# . $HOME/.asdf/completions/asdf.bash
-
-export GPG_TTY=$(tty)
-export PINENTRY_USER_DATA="USE_CURSES=1"
+. $HOME/.asdf/completions/asdf.bash
+. ~/.asdf/plugins/java/set-java-home.zsh
 
 source $HOME/.bash_profile

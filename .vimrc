@@ -15,6 +15,7 @@ else
 endif
   " General
   Plug 'hashivim/vim-terraform'
+  Plug 'junegunn/vim-easy-align'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'liuchengxu/vim-better-default'
@@ -31,23 +32,26 @@ endif
 
   " Clojure
   " Plug 'clojure-vim/acid.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'clojure-vim/vim-jack-in', { 'for' : 'clojure' }
-  " Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
-  " Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-  Plug 'guns/vim-sexp', { 'for': 'clojure' }
+  Plug 'clojure-vim/vim-jack-in', { 'for' : 'clojure' }
+  Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
+  Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+  Plug 'guns/vim-sexp'
   " Plug 'jiangmiao/auto-pairs'
-  Plug 'liquidz/vim-iced', {'for': 'clojure'}
+  " Plug 'liquidz/vim-iced', {'for': 'clojure'}
   " Plug 'ncm2/float-preview.nvim'
-  " Plug 'olical/conjure', { 'tag': 'v4.1.0' }
+  Plug 'olical/conjure', { 'for': 'clojure, fennel' }
   " Plug 'radenling/vim-dispatch-neovim', { 'for' : 'clojure' }
   " Plug 'shougo/deoplete.nvim'
-  " Plug 'tpope/vim-dispatch', { 'for' : 'clojure' }
+  Plug 'tpope/vim-dispatch'
   " Plug 'tpope/vim-fireplace'
   " Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
-  " Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-sexp-mappings-for-regular-people'
+  Plug 'tpope/vim-surround'
   " Plug 'venantius/vim-cljfmt'
   " Plug 'w0rp/ale'
+
+  " Fennel
+  Plug 'bakpakin/fennel.vim'
 
   " Testing
   Plug 'janko/vim-test'
@@ -85,15 +89,15 @@ set tabstop=2 shiftwidth=2 expandtab softtabstop=2
 " set termguicolors
 " set textwidth=80
 
-" Leader: '\', LocalLeader: ','
-let mapleader='\'
-let maplocalleader=','
-
-colorscheme gruvbox
-let g:airline_theme='gruvbox'
+" Leader: ' ', LocalLeader: ';'
+let mapleader=' '
+let maplocalleader=';'
 
 colorscheme PaperColor
 let g:airline_theme='papercolor'
+
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
 
 " rainbow parentheses
 let g:rainbow_active = 1
@@ -107,12 +111,11 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+vnoremap <C-c> "+y " Copy selected text to + register with Ctrl+C
+inoremap <C-v> <ESC>"+pa " Paste text from + register with Ctrl+V in Insert Mode
 " Copy file path to clipboard
 nnoremap <C-c> :let @+ = expand("%")<CR>
 nnoremap <C-C> :let @+ = expand("%:p")<CR>
-
-vnoremap <C-c> "+y " Copy selected text to + register with Ctrl+C
-inoremap <C-v> <ESC>"+pa " Paste text from + register with Ctrl+V in Insert Mode
 
 " " open a NERDTree automatically when vim starts up if no files were specified
 " autocmd StdinReadPre * let s:std_in=1
@@ -176,7 +179,13 @@ let g:mix_format_silent_errors = 1
 " (def clojure-stuff-bellow)
 " Enable vim-iced's default key mapping
 " This is recommended for newbies
-let g:iced_enable_default_key_mappings = v:true
+" let g:iced_enable_default_key_mappings = v:true
 
 let g:python2_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
