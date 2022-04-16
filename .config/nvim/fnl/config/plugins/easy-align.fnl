@@ -1,4 +1,4 @@
-(module config.plugin.easy-align
+(module config.plugins.easy-align
         {autoload {nvim aniseed.nvim}})
 
 ;; Start interactive EasyAlign in visual mode (e.g. vipga)

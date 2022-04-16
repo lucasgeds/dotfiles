@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Comment.nvim"] = {
+    loaded = true,
+    path = "/Users/lucas.guedes/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
   aniseed = {
     loaded = true,
     path = "/Users/lucas.guedes/.local/share/nvim/site/pack/packer/start/aniseed",
@@ -98,11 +103,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/lucas.guedes/.local/share/nvim/site/pack/packer/start/papercolor-theme",
     url = "https://github.com/NLKNguyen/papercolor-theme"
-  },
-  ["vim-commentary"] = {
-    loaded = true,
-    path = "/Users/lucas.guedes/.local/share/nvim/site/pack/packer/start/vim-commentary",
-    url = "https://github.com/tpope/vim-commentary"
   },
   ["vim-easy-align"] = {
     loaded = true,

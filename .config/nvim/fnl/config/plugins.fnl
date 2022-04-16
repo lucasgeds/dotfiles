@@ -1,11 +1,11 @@
-(module config.plugin
+(module config.plugins
   {autoload {core        aniseed.core
              nvim        aniseed.nvim
              packer      packer
              packer-util packer.util}})
 
 (defn- safe-require-plugin-config [name]
-  (let [(ok? val-or-err) (pcall require (.. :config.plugin. name))]
+  (let [(ok? val-or-err) (pcall require (.. :config.plugins. name))]
     (when (not ok?)
       (print (.. "config error: " val-or-err)))))
 
@@ -23,26 +23,15 @@
             (use (core.assoc opts 1 name)))))))
   nil)
 
-; Autocommand that reloads neovim whenever you save the plugins.lua file
-; (nvim.ex.augroup :packer_user_config)
-; (nvim.ex.autocmd_)
-; (nvim.ex.augroup :END)
-; (nvim.ex.autocmd "BufWritePost plugins.fnl source plugins.lua | PackerSync")
-
-;; Have packer use a popup window
-(packer.init
-  {:display
-   {:open_fn (fn [] (packer-util.float {:border "rounded"}))}})
-
 ;; plugins managed by packer
-;; :mod specifies namespace under plugin directory
+;; :mod specifies namespace under plugins directory
 
 (use
-  ;; let packer manage itself
-  :wbthomason/packer.nvim {}
+  ;; have packer manage itself
+  :wbthomason/packer.nvim {:mod :packer}
 
   ;; nvim config and plugins in Fennel
-  :Olical/aniseed           {:branch :develop}
+  :Olical/aniseed {}
 
   ;; colorscheme
   :NLKNguyen/papercolor-theme  {:mod :colorscheme}
@@ -51,8 +40,14 @@
 
   ;; text manipulation
   :junegunn/vim-easy-align {:mod :easy-align}
-  :tpope/vim-commentary    {}
+  :numToStr/Comment.nvim   {:mod :comment}
 
   :lewis6991/impatient.nvim {}
   )
+
+;; autocommand that reloads neovim whenever you save the plugins.lua file
+;; (nvim.ex.augroup :packer_user_config)
+;; (nvim.ex.autocmd_)
+;; (nvim.ex.augroup :END)
+;; (nvim.ex.autocmd "BufWritePost plugins.fnl source plugins.lua | PackerSync")
 

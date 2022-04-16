@@ -1,5 +1,5 @@
 local _2afile_2a = "/Users/lucas.guedes/.config/nvim/fnl/config/plugins/colorscheme.fnl"
-local _2amodule_name_2a = "config.plugin.theme"
+local _2amodule_name_2a = "config.plugins.theme"
 local _2amodule_2a
 do
   package.loaded[_2amodule_name_2a] = {}

@@ -1,5 +1,5 @@
 local _2afile_2a = "/Users/lucas.guedes/.config/nvim/fnl/config/plugins/easy-align.fnl"
-local _2amodule_name_2a = "config.plugin.easy-align"
+local _2amodule_name_2a = "config.plugins.easy-align"
 local _2amodule_2a
 do
   package.loaded[_2amodule_name_2a] = {}

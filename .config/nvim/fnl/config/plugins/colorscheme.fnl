@@ -1,4 +1,4 @@
-(module config.plugin.theme
+(module config.plugins.theme
   {autoload {core  aniseed.core
              nvim  aniseed.nvim
              theme github-theme}})
