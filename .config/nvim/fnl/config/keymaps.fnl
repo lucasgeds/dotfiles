@@ -44,8 +44,7 @@
   (keymap :n :<S-h> ":bprevious<CR>" opts)
 
   ;; Open native file tree Netrw
-  (keymap :n :<leader>f ":Lex 20<CR>" opts)
-  (keymap :n :<localleader>f ":Lex 20<CR>" opts)
+  (keymap :n :<leader>ex ":Lex 20<CR>" opts)
 
   ;; Move text up and down
   (keymap :n :<A-j> "<Esc>:m .+1<CR>==gi" opts)
