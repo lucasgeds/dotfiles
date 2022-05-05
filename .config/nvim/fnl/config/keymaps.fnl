@@ -54,7 +54,7 @@
   (keymap :n :<C-c> ":let @+ = expand('%:p')<CR>" opts) ; Copy file path to + register in Normal Mode
   (keymap :i :<C-v> "<Esc>\"+pa" opts) ; Paste text from + register with Ctrl+V in Insert Mode
   (keymap :v :<C-c> "\"+y" opts) ; Copy selected text to + register with Ctrl+C in Visual Mode
-  (keymap :v :p "\"_dP" opts) ; Preserve yanked text on visual mode pasting
+  (keymap :v :p "\"_dP" opts) ; Preserve yanked text when pasting in Visual Mode
 
   ;; Insert
   ;; Press jk fast to enter

@@ -47,7 +47,7 @@
 
   ;; sexp
   :tpope/vim-repeat                           {}
-  :tpope/vim-sexp-mappings-for-regular-people {:requires [:guns/vim-sexp]}
+  :tpope/vim-sexp-mappings-for-regular-people {:mod :sexp}
   :tpope/vim-surround                         {}
 
   ;; repl

@@ -105,8 +105,8 @@ fi
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 alias zshconfig="$EDITOR ~/.zshrc"
 alias be="bundle exec"
-alias grbom="git fetch && git rebase origin/$(git_main_branch)"
-alias grohm="git fetch && git reset --hard origin/$(git_main_branch)"
+alias grbom='git fetch && git rebase origin/$(git_main_branch)'
+alias grohm='git fetch && git reset --hard origin/$(git_main_branch)'
 
 export PATH="/opt/local/bin:$PATH"
 export PATH="/opt/local/sbin:$PATH"
