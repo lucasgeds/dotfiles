@@ -107,6 +107,16 @@ alias zshconfig="$EDITOR ~/.zshrc"
 alias be="bundle exec"
 alias grbom='git fetch && git rebase origin/$(git_main_branch)'
 alias grohm='git fetch && git reset --hard origin/$(git_main_branch)'
+alias l='gls -ahl --color --group-directories-first'
+
+# Make all GNU flavor commands available, may override same-name BSD flavor commands
+# For x86 Mac
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
+
+# For M1 Mac
+# export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
+# export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
 
 export PATH="/opt/local/bin:$PATH"
 export PATH="/opt/local/sbin:$PATH"
@@ -126,5 +136,9 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 . ~/.asdf/plugins/java/set-java-home.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source $HOME/.bash_profile
