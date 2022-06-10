@@ -1,5 +1,5 @@
 -- Entrypoint for my Neovim configuration!
--- We simply bootstrap packer and Aniseed here.
+-- We simply bootstrap Packer and Aniseed here.
 -- It's then up to Aniseed to compile and load fnl/init.fnl
 
 local execute = vim.api.nvim_command

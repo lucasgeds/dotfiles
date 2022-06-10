@@ -2,6 +2,8 @@
   {autoload {core  aniseed.core
              nvim  aniseed.nvim}})
 
-(set nvim.o.background "dark")
-
 (nvim.ex.colorscheme "PaperColor")
+(nvim.ex.colorscheme "gruvbox")
+(nvim.ex.syntax "on")
+
+(set nvim.o.background "dark")

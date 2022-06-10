@@ -71,8 +71,8 @@
     (tset config :options  :component_separators {:left "" :right ""})
     (tset config :options  :section_separators   {:left "" :right ""})
 
-    (tset config :sections :lualine_a            {1 filename})
-    (tset config :sections :lualine_b            {1 diagnostics})
+    (tset config :sections :lualine_a            {})
+    (tset config :sections :lualine_b            {1 filename})
     (tset config :sections :lualine_c            {})
     (tset config :sections :lualine_x            {1 :filetype })
     (tset config :sections :lualine_y            {1 progress 2 location})

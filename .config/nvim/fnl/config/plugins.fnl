@@ -5,35 +5,32 @@
 ;; :mod specifies namespace under plugins directory
 
 (packer.use
-  ;; base
+  ;; Base
   :lewis6991/impatient.nvim {}             ; speed up neovim startup
-  :olical/aniseed           {}             ; nvim config and plugins in fennel
   :wbthomason/packer.nvim   {:mod :packer} ; have packer manage itself
+  :olical/aniseed           {}             ; nvim config and plugins in fennel
 
-  ;; colorscheme
+  ;; Colorschemes
   :morhetz/gruvbox            {:mod :colorscheme}
   :nlknguyen/papercolor-theme {:mod :colorscheme}
 
-  ;; status line
+  ;; Status Line
   :kyazdani42/nvim-web-devicons {}
   :nvim-lualine/lualine.nvim    {:mod :lualine}
 
-  ;; tree
+  ;; Telescope
+  :nvim-telescope/telescope.nvim {:mod      :telescope
+                                  :requires [:nvim-lua/plenary.nvim
+                                             :nvim-lua/popup.nvim
+                                             :nvim-telescope/telescope-smart-history.nvim]}
 
-  ;; telescope
-  :nvim-telescope/telescope.nvim {:mod :telescope 
-                                  :requires [[:nvim-lua/popup.nvim]
-                                             [:nvim-lua/plenary.nvim]]}
+  ;; Parsing System
+  :nvim-treesitter/nvim-treesitter {:run ":TSUpdate" :mod :treesitter}
 
-  ;; parsing system
-  :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"
-                                    :mod :treesitter}
-
-  ;; lsp
+  ;; LSP
   :neovim/nvim-lspconfig {:mod :lspconfig}
 
-
-  ;; autocomplete
+  ;; Autocomplete
   :hrsh7th/nvim-cmp {:mod :cmp
                      :requires [:hrsh7th/cmp-buffer
                                 :hrsh7th/cmp-cmdline
@@ -41,20 +38,22 @@
                                 :hrsh7th/cmp-path
                                 :paterjason/cmp-conjure]}
 
-  ;; text manipulation
+  ;; Text manipulation
   :junegunn/vim-easy-align {:mod :easy-align}
   :numtostr/comment.nvim   {:mod :comment-nvim}
 
-  ;; sexp
+  ;; ===== Language-specific Plugins
+
+  ;; ==== Clojure
+  ;; REPL
+  :clojure-vim/vim-jack-in {}
+  :olical/conjure          {:branch :master :mod :conjure}
+  ;; SEXP
   :tpope/vim-repeat                           {}
-  :tpope/vim-sexp-mappings-for-regular-people {:mod :sexp}
+  :tpope/vim-sexp-mappings-for-regular-people {:mod :sexp
+                                               :requires [:guns/vim-sexp]}
   :tpope/vim-surround                         {}
 
-  ;; repl
-  :clojure-vim/vim-jack-in {}
-  :olical/conjure          {:mod :conjure}
-
-  ;; language-specific plugins
-  ;; flutter
+  ;; ==== Flutter
   :akinsho/flutter-tools.nvim {:requires [[:nvim-lua/plenary.nvim]]}
   )
