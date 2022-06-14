@@ -24,6 +24,9 @@
                                              :nvim-lua/popup.nvim
                                              :nvim-telescope/telescope-smart-history.nvim]}
 
+  ;; Keybinding hints
+  :folke/which-key.nvim {:mod :which-key}
+
   ;; Parsing System
   :nvim-treesitter/nvim-treesitter {:run ":TSUpdate" :mod :treesitter}
 
