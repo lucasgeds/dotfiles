@@ -1,31 +1,5 @@
 (module config.plugins.lualine)
 
-(def- config
-  {:options           {:icons_enabled true :theme :auto
-                       :component_separators {:left "" :right ""}
-                       :section_separators {:left "" :right ""}
-                       :disabled_filetypes {}
-                       :always_divide_middle true
-                       :globalstatus false}
-
-   :sections          {:lualine_a {1 :mode}
-                       :lualine_b {1 :branch 2 :diff 3 :diagnostics}
-                       :lualine_c {1 :filename}
-                       :lualine_x {1 :encoding 2 :fileformat 3 :filetype}
-                       :lualine_y {1 :progress}
-                       :lualine_z {1 :location}}
-
-   :inactive_sections {:lualine_a {}
-                       :lualine_b {}
-                       :lualine_c {1 :filename}
-                       :lualine_x {1 :location}
-                       :lualine_y {}
-                       :lualine_z {}}
-
-   :tabline           {}
-
-   :extensions        {}})
-
 (def- branch  {1 :branch :icons_enabled true :icon ""})
 
 (def- buffers {1 :buffers :show_filename_only true :mode 2})
@@ -66,21 +40,47 @@
 
 (defn- spaces [] (.. "spaces: " (vim.api.nvim_buf_get_option 0 :shiftwidth)))
 
+(def- default-config
+  {:options           {:icons_enabled        true
+                       :theme                :auto
+                       :component_separators {:left "" :right ""}
+                       :section_separators   {:left "" :right ""}
+                       :disabled_filetypes   {}
+                       :always_divide_middle true
+                       :globalstatus         false}
+
+   :sections          {:lualine_a {1 :mode}
+                       :lualine_b {1 :branch 2 :diff 3 :diagnostics}
+                       :lualine_c {1 :filename}
+                       :lualine_x {1 :encoding 2 :fileformat 3 :filetype}
+                       :lualine_y {1 :progress}
+                       :lualine_z {1 :location}}
+
+   :inactive_sections {:lualine_a {}
+                       :lualine_b {}
+                       :lualine_c {1 :filename}
+                       :lualine_x {1 :location}
+                       :lualine_y {}
+                       :lualine_z {}}
+
+   :tabline            {}
+   :extensions         {}})
+
 (let [(ok? lualine) (pcall require :lualine)]
   (when ok?
-    (tset config :options  :component_separators {:left "" :right ""})
-    (tset config :options  :section_separators   {:left "" :right ""})
+    (tset default-config :options  :component_separators {:left "" :right ""})
+    (tset default-config :options  :section_separators   {:left "" :right ""})
 
-    (tset config :sections :lualine_a            {})
-    (tset config :sections :lualine_b            {1 filename})
-    (tset config :sections :lualine_c            {})
-    (tset config :sections :lualine_x            {1 :filetype })
-    (tset config :sections :lualine_y            {1 progress 2 location})
-    (tset config :sections :lualine_z            {1 mode})
+    (tset default-config :sections :lualine_a            {})
+    (tset default-config :sections :lualine_b            {1 filename})
+    (tset default-config :sections :lualine_c            {})
+    (tset default-config :sections :lualine_x            {1 :filetype })
+    (tset default-config :sections :lualine_y            {1 progress 2 location})
+    (tset default-config :sections :lualine_z            {1 mode})
 
-    (tset config :tabline  :lualine_b            {1 buffers})
-    (tset config :tabline  :lualine_x            {1 diff 2 :branch})
-    (tset config :tabline  :lualine_y            {1 tabs})
+    (tset default-config :tabline  :lualine_b            {1 buffers})
+    (tset default-config :tabline  :lualine_x            {1 diff 2 :branch})
+    (tset default-config :tabline  :lualine_y            {1 tabs})
 
-    (lualine.setup config)))
+    (lualine.setup default-config)))
 

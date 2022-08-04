@@ -31,5 +31,5 @@
 ;; autocommand that reloads neovim whenever you save the plugins.lua file
 ;; (nvim.ex.augroup :packer_user_config)
 ;; (nvim.ex.autocmd_)
-;; (nvim.ex.augroup :END)
 ;; (nvim.ex.autocmd "BufWritePost plugins.fnl source plugins.lua | PackerSync")
+;; (nvim.ex.augroup :END)
