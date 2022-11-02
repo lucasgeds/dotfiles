@@ -51,25 +51,25 @@
   :junegunn/vim-easy-align {:mod :easy-align}
   :numtostr/comment.nvim   {:mod :comment-nvim}
 
-  ;; Testing
-  :vim-test/vim-test {:mod :vim-test}
-
-  ;; ===== Language-specific Plugins
-
-  ;; ==== Clojure
-  ;; REPL
-  :clojure-vim/vim-jack-in {}
-  :olical/conjure          {:branch :master
-                            :mod    :conjure}
   ;; SEXP
   :tpope/vim-repeat                           {}
   :tpope/vim-sexp-mappings-for-regular-people {:mod      :sexp
                                                :requires [:guns/vim-sexp]}
   :tpope/vim-surround                         {}
 
-  ;; ==== Flutter
+  ;; Testing
+  :vim-test/vim-test {:mod :vim-test}
+
+  ;; === Language-specific Plugins
+
+  ;; == Clojure
+  ;; REPL
+  :clojure-vim/vim-jack-in {}
+  :olical/conjure          {:branch :master
+                            :mod    :conjure}
+  ;; == Flutter
   :akinsho/flutter-tools.nvim {:requires [:nvim-lua/plenary.nvim]}
 
-  ;; ==== Markdown
+  ;; == Markdown
   :iamcco/markdown-preview.nvim {:run (λ [] (nvim.fn.mkdp#util#install))}
   )

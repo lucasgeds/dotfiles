@@ -4,8 +4,10 @@
 
 (treesitter.setup {:ensure_installed [:clojure :dart :elixir :fennel :lua]
 
+                   :sync_install     true
+
                    :highlight        {:enable true
-                                      :disable [:fennel]
+                                      :disable []
                                       :custom_captures {"s/defn" "clojureTSKeywordFunction"}}
 
                    :indent           {:enable false}

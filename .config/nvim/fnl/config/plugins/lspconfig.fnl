@@ -20,7 +20,7 @@
   (define-signs "LspDiagnostics"))
 
 ;; Server features
-(let [capabilities (cmplsp.update_capabilities (vim.lsp.protocol.make_client_capabilities))
+(let [capabilities (cmplsp.default_capabilities (vim.lsp.protocol.make_client_capabilities))
 
       handlers     {"textDocument/publishDiagnostics"
                     (vim.lsp.with vim.lsp.diagnostic.on_publish_diagnostics

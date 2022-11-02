@@ -22,7 +22,7 @@ ZSH_THEME_RANDOM_CANDIDATES=(
   "crcandy"
   "strug"
 )
-ZSH_THEME="minimal"
+ZSH_THEME="passion"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
