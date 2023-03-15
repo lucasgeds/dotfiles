@@ -18,7 +18,7 @@
        :ignorecase     true               ; ignore case in search patterns
        :mouse          "a"                ; allow the mouse to be used in neovim
        :number         true               ; set numbered lines
-       :numberwidth    4                  ; set number column width to 2 {default 4}
+       :numberwidth    2                  ; set number column width to 2 {default 4}
        :pumheight      10                 ; pop up menu height
        :relativenumber false              ; set relative numbered lines
        :scrolloff      8                  ; minimal number of screen lines to keep above and below the cursor
@@ -44,3 +44,4 @@
   (each [option value (pairs options)]
     (core.assoc nvim.o option value)))
 
+(set nvim.g.clojure_fuzzy_indent_patterns ["^with" "^def" "^let" "^flow"])

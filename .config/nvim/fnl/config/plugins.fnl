@@ -7,8 +7,8 @@
 
 (packer.use
   ;; Base
-  :lewis6991/impatient.nvim {}             ; speed up neovim startup
   :wbthomason/packer.nvim   {:mod :packer} ; have packer manage itself
+  :lewis6991/impatient.nvim {}             ; speed up neovim startup
   :olical/aniseed           {}             ; nvim config and plugins in fennel
 
   ;; Colorschemes
@@ -50,12 +50,16 @@
   ;; Text manipulation
   :junegunn/vim-easy-align {:mod :easy-align}
   :numtostr/comment.nvim   {:mod :comment-nvim}
+  :sk1418/HowMuch          {}
 
   ;; SEXP
   :tpope/vim-repeat                           {}
   :tpope/vim-sexp-mappings-for-regular-people {:mod      :sexp
                                                :requires [:guns/vim-sexp]}
   :tpope/vim-surround                         {}
+
+  ;; Dispatch
+  :radenling/vim-dispatch-neovim {:requires [:tpope/vim-dispatch]}
 
   ;; Testing
   :vim-test/vim-test {:mod :vim-test}
@@ -64,9 +68,11 @@
 
   ;; == Clojure
   ;; REPL
+  :clojure-vim/clojure.vim {:mod :clojure-vim}
   :clojure-vim/vim-jack-in {}
-  :olical/conjure          {:branch :master
-                            :mod    :conjure}
+  :m00qek/baleia.nvim      {:mod :baleia}
+  :olical/conjure          {:mod :conjure}
+
   ;; == Flutter
   :akinsho/flutter-tools.nvim {:requires [:nvim-lua/plenary.nvim]}
 

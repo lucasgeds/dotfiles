@@ -2,21 +2,23 @@
   {autoload {nvim       aniseed.nvim
              treesitter nvim-treesitter.configs}})
 
-(treesitter.setup {:ensure_installed [:clojure :dart :elixir :fennel :lua]
+(treesitter.setup {:additional_vim_regex_highlighting true
+
+                   :ensure_installed [:clojure :dart :elixir :fennel :lua]
 
                    :sync_install     true
 
-                   :highlight        {:enable true
-                                      :disable []
-                                      :custom_captures {"s/defn" "clojureTSKeywordFunction"}}
+                   :highlight        {:custom_captures {"s/defn" "clojureTSKeywordFunction"}
+                                      :enable true
+                                      :disable []}
 
-                   :indent           {:enable false}
+                   :indent           {:enable true}
 
-                   :playground       {:enable          true
+                   :playground       {:enable          false
                                       :disable         {}
                                       :persist_queries false
                                       :updatetime      25
-                                      :keybindings     {:toggle_query_editor :o
+                                      :keybindings     {:toggle_query_editor       :o
                                                         :toggle_hl_groups          :i
                                                         :toggle_injected_languages :t
                                                         :toggle_anonymous_nodes    :a
@@ -28,6 +30,7 @@
                                                         :show_help                 "?"}}})
 
 ;; Code Folding
-(nvim.ex.autocmd "BufReadPost,FileReadPost * normal zR")
-(set nvim.o.foldexpr "nvim_treesitter#foldexpr()")
-(set nvim.o.foldmethod :expr)
+; (set nvim.o.foldexpr "nvim_treesitter#foldexpr()")
+; (set nvim.o.foldmethod :expr)
+;; Auto open all folds
+; (nvim.ex.autocmd "BufReadPost,FileReadPost * normal zR")

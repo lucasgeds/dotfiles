@@ -32,8 +32,8 @@
   (nvim.set_keymap :n :<leader>bo ":%bd|e#<CR>"    opts)
 
   ;; Resize with Shift+arrows
-  (nvim.set_keymap :n :<S-Up>    ":resize +2<CR>"          opts)
-  (nvim.set_keymap :n :<S-Down>  ":resize -2<CR>"          opts)
+  (nvim.set_keymap :n :<S-Up>    ":resize -2<CR>"          opts)
+  (nvim.set_keymap :n :<S-Down>  ":resize +2<CR>"          opts)
   (nvim.set_keymap :n :<S-Left>  ":vertical resize -2<CR>" opts)
   (nvim.set_keymap :n :<S-Right> ":vertical resize +2<CR>" opts)
 
