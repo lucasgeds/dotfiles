@@ -2,13 +2,11 @@
   {autoload {nvim       aniseed.nvim
              treesitter nvim-treesitter.configs}})
 
-(treesitter.setup {:additional_vim_regex_highlighting true
+(treesitter.setup {; :additional_vim_regex_highlighting true
 
                    :ensure_installed [:clojure :dart :elixir :fennel :lua]
 
-                   :sync_install     true
-
-                   :highlight        {:custom_captures {"s/defn" "clojureTSKeywordFunction"}
+                   :highlight        {; :custom_captures {"s/defn" "clojureTSKeywordFunction"}
                                       :enable true
                                       :disable []}
 
@@ -27,7 +25,9 @@
                                                         :unfocus_language          :F
                                                         :update                    :R
                                                         :goto_node                 :<cr>
-                                                        :show_help                 "?"}}})
+                                                        :show_help                 "?"}}
+
+                   :sync_install     true})
 
 ;; Code Folding
 ; (set nvim.o.foldexpr "nvim_treesitter#foldexpr()")

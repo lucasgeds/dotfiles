@@ -44,4 +44,5 @@
   (each [option value (pairs options)]
     (core.assoc nvim.o option value)))
 
+(set nvim.g.clojure_align_subforms 1)
 (set nvim.g.clojure_fuzzy_indent_patterns ["^with" "^def" "^let" "^flow"])
