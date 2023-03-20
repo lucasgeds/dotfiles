@@ -12,6 +12,7 @@
   :olical/aniseed           {}             ; nvim config and plugins in fennel
 
   ;; Colorschemes
+  :folke/tokyonight.nvim      {:mod :colorscheme}
   :morhetz/gruvbox            {:mod :colorscheme}
   :nlknguyen/papercolor-theme {:mod :colorscheme}
 

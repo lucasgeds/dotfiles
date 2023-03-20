@@ -1,9 +1,10 @@
 (module config.plugins.colorscheme
   {autoload {core  aniseed.core
-             nvim  aniseed.nvim}})
+             nvim  aniseed.nvim
+             tokyo tokyonight}})
 
-(nvim.ex.colorscheme :PaperColor)
-(nvim.ex.colorscheme :gruvbox)
-(nvim.ex.syntax      :on)
+(tokyo.setup {:style :moon})
 
-(set nvim.o.background :dark)
+(nvim.ex.colorscheme :tokyonight)
+
+(set nvim.o.background :light)

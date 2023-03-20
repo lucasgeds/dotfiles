@@ -2,6 +2,8 @@
   {autoload {nvim       aniseed.nvim
              treesitter nvim-treesitter.configs}})
 
+(nvim.ex.syntax      :off)
+
 (treesitter.setup {; :additional_vim_regex_highlighting true
 
                    :ensure_installed [:clojure :dart :elixir :fennel :lua]
