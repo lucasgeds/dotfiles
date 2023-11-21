@@ -6,7 +6,7 @@
 
 (treesitter.setup {; :additional_vim_regex_highlighting true
 
-                   :ensure_installed [:clojure :dart :elixir :fennel :lua]
+                   :ensure_installed [:bash :clojure :dart :elixir :fennel :javascript :lua :scala :sql]
 
                    :highlight        {; :custom_captures {"s/defn" "clojureTSKeywordFunction"}
                                       :enable true

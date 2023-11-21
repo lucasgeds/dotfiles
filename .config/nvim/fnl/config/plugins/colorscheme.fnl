@@ -7,4 +7,4 @@
 
 (nvim.ex.colorscheme :tokyonight)
 
-(set nvim.o.background :light)
+(set nvim.o.background :dark)

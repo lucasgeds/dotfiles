@@ -75,6 +75,7 @@
 
    :extensions {:file_browser {:hidden       true
                                :hijack_netrw false      ; disables netrw and use telescope-file-browser in its place
+                               :path         "%:p:h"
                                :mappings     {["i"] {}  ; your custom insert mode mappings
                                               ["n"] {}} ; your custom normal mode mappings
                                :theme        :ivy}
@@ -84,7 +85,9 @@
                                :hidden_files true
                                :theme        :ivy}}
 
-   :pickers    {:buffers    {:theme :ivy}
+   :pickers    {:buffers    {:mappings {:i {:<A-d> actions.delete_buffer}
+                                        :n {:bd     actions.delete_buffer}}
+                             :theme :ivy}
                 :find_files {:find_command ["rg" "--files" "--iglob" "!.git" "--hidden"]
                              :theme :ivy}
                 :help_tags  {:theme :ivy}
