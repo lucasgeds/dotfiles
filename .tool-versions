@@ -1,11 +1,11 @@
 clojure 1.11.1.1257
-elixir  1.13.4-otp-25
-erlang  25.0.2
-golang  1.15.7
-java    adoptopenjdk-11.0.18+10
+elixir  1.15.7-otp-26
+erlang  26.1.2
+golang  1.21.4
+java    adoptopenjdk-jre-21.0.1+12.0.LTS
 maven   3.6.3
 nodejs  16.15.1
-python  3.11.2
-ruby    2.6.5
+python  3.12.0
+ruby    3.2.2
 sbt     1.8.2
 scala   3.2.2
