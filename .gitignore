@@ -1,4 +1,0 @@
-*.swp
-*.swo
-.config/nvim/lua/
-.config/nvim/plugin/
