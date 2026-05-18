@@ -1,0 +1,11 @@
+[user]
+	email = lucasgeds@gmail.com
+	name = Lucas Guedes
+[commit]
+	gpgsign = false
+[core]
+	hooksPath = .git/hooks
+[color]
+	diff = auto
+	status = auto
+	branch = auto
