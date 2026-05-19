@@ -25,17 +25,16 @@ opt.sidescrolloff  = 8
 opt.signcolumn     = "yes"
 opt.undofile       = true
 opt.updatetime     = 300
-opt.showmode       = false
+opt.showmode       = true
 opt.cursorline     = true
-opt.cmdheight      = 2
-opt.pumheight      = 10
+opt.cmdheight      = 1
 opt.timeoutlen     = 700
 opt.swapfile       = false
 
 -- =====================================================================
--- Globals
+-- Clojure (settings; plugins live below in lazy.setup under the same header)
 -- =====================================================================
--- Clojure indentation (built-in clojure runtime files read these)
+-- Built-in clojure runtime files read these for indentation
 vim.g.clojure_align_subforms        = 1
 vim.g.clojure_fuzzy_indent_patterns = { "^with", "^def", "^let", "^flow" }
 
@@ -44,7 +43,6 @@ vim.g["conjure#client#clojure#nrepl#connection#auto_repl#enabled"] = false
 vim.g["conjure#client#clojure#nrepl#eval#auto_require"]            = false
 vim.g["conjure#client#clojure#nrepl#test#current_form_names"]      = { "deftest", "defflow" }
 vim.g["conjure#log#strip_ansi_escape_sequences_line_limit"]        = 0      -- baleia colorizes; don't strip
-vim.g["conjure#mapping#doc_word"]                                  = false  -- avoid LSP K collision
 
 -- =====================================================================
 -- Diagnostics appearance
@@ -113,7 +111,7 @@ require("lazy").setup({
     branch = "master",
     build = ":TSUpdate",
     opts = {
-      ensure_installed = { "clojure", "lua", "vim", "vimdoc", "markdown", "bash" },
+      ensure_installed = { "clojure", "lua", "vim", "vimdoc", "markdown", "bash", "json", "yaml", "regex" },
       highlight = { enable = true },
       indent    = { enable = true },
     },
@@ -122,12 +120,7 @@ require("lazy").setup({
     end,
   },
 
-  -- LSP install + setup
-  { "williamboman/mason.nvim", opts = {} },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    opts = { ensure_installed = { "clojure_lsp" } },
-  },
+  -- LSP. clojure-lsp installed via Homebrew (on PATH).
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -163,25 +156,45 @@ require("lazy").setup({
     end,
   },
 
-  -- Clojure REPL
+  -- ===================================================================
+  -- Clojure
+  -- ===================================================================
+
+  -- Colorize ANSI escape sequences in Conjure log buffers.
+  -- Eager-loaded so vim.g.conjure_baleia is ready before any clojure file opens.
+  {
+    "m00qek/baleia.nvim",
+    config = function()
+      vim.g.conjure_baleia = require("baleia").setup({})
+      vim.api.nvim_create_user_command("BaleiaColorize", function()
+        vim.g.conjure_baleia.once(vim.api.nvim_get_current_buf())
+      end, { bang = true })
+    end,
+  },
+
+  -- REPL. Autocmd lives in init() so it's registered at startup,
+  -- before Conjure itself loads and before any log buffer exists.
   {
     "Olical/conjure",
     ft = { "clojure", "edn", "fennel", "lisp" },
-  },
-
-  -- Colorize ANSI escape sequences in Conjure log buffers
-  {
-    "m00qek/baleia.nvim",
-    ft = { "clojure", "edn", "fennel", "lisp" },
-    config = function()
-      local baleia = require("baleia").setup({ line_starts_at = 3 })
-      vim.api.nvim_create_autocmd({ "BufNew", "BufWinEnter" }, {
+    init = function()
+      vim.api.nvim_create_autocmd("BufWinEnter", {
         pattern = "conjure-log-*",
         callback = function(args)
-          baleia.automatically(args.buf)
+          if vim.g.conjure_baleia then
+            vim.g.conjure_baleia.once(args.buf)
+            vim.g.conjure_baleia.automatically(args.buf)
+          end
         end,
       })
     end,
+  },
+
+  -- Structural editing (slurp/barf/raise, paredit-style)
+  {
+    "julienvincent/nvim-paredit",
+    ft = { "clojure", "edn", "fennel", "lisp" },
+    config = true,
   },
 })
 
@@ -199,10 +212,19 @@ map("n", "<C-k>", "<C-w>k", kopt)
 map("n", "<C-l>", "<C-w>l", kopt)
 
 -- Buffer navigation
-map("n", "<S-h>",      ":bprevious<CR>", kopt)
-map("n", "<S-l>",      ":bnext<CR>",     kopt)
-map("n", "<leader>bd", ":bdelete<CR>",   kopt)
-map("n", "<leader>bo", ":%bd|e#<CR>",    kopt)
+local function close_other_buffers()
+  local current = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.bo[buf].buflisted then
+      vim.api.nvim_buf_delete(buf, {})
+    end
+  end
+end
+
+map("n", "<S-h>",      ":bprevious<CR>",     kopt)
+map("n", "<S-l>",      ":bnext<CR>",         kopt)
+map("n", "<leader>bd", ":bdelete<CR>",       kopt)
+map("n", "<leader>bo", close_other_buffers,  kopt)
 
 -- Window resize
 map("n", "<S-Up>",    ":resize -2<CR>",          kopt)
@@ -254,12 +276,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local b = { buffer = args.buf, noremap = true, silent = true }
     -- Diagnostics
     map("n", "<leader>le", vim.diagnostic.open_float, b)
-    map("n", "<leader>lj", vim.diagnostic.goto_next,  b)
-    map("n", "<leader>lk", vim.diagnostic.goto_prev,  b)
+    map("n", "<leader>lj", function() vim.diagnostic.jump({ count = 1,  float = true }) end, b)
+    map("n", "<leader>lk", function() vim.diagnostic.jump({ count = -1, float = true }) end, b)
     map("n", "<leader>lq", vim.diagnostic.setloclist, b)
     -- LSP actions
-    map("n", "<leader>k",  vim.lsp.buf.hover,           b)
-    map("n", "<leader>ld", vim.lsp.buf.declaration,     b)
     map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, b)
     map("n", "<leader>lh", vim.lsp.buf.signature_help,  b)
     map("n", "<leader>ln", vim.lsp.buf.rename,          b)
@@ -270,11 +290,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>lw", function() require("telescope.builtin").diagnostics() end,         b)
     map("n", "<leader>lr", function() require("telescope.builtin").lsp_references() end,      b)
     map("n", "<leader>li", function() require("telescope.builtin").lsp_implementations() end, b)
-    -- Auto-format on save if server supports it
+    -- Auto-format on save if server supports it.
+    -- The augroup is buffer-scoped and cleared on each attach, so LspRestart
+    -- (or any detach/re-attach) replaces the handler instead of stacking duplicates.
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client and client.server_capabilities.documentFormattingProvider then
+      local group = vim.api.nvim_create_augroup("LspFormatOnSave_" .. args.buf, { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = args.buf,
+        group    = group,
+        buffer   = args.buf,
         callback = function() vim.lsp.buf.format({ bufnr = args.buf }) end,
       })
     end
