@@ -107,13 +107,9 @@ alias grbom='git fetch && git rebase origin/$(git_main_branch)'
 alias grohm='git fetch && git reset --hard origin/$(git_main_branch)'
 
 # ------------------------------------------------------------
-# BASIC CONFIGURATION
+# HOMEBREW
 # ------------------------------------------------------------
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/sbin:$PATH"
-export PATH="/usr/local/opt/curl/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # ------------------------------------------------------------
 # ASDF

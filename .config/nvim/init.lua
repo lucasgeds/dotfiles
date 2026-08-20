@@ -30,6 +30,7 @@ opt.cursorline     = true
 opt.cmdheight      = 1
 opt.timeoutlen     = 700
 opt.swapfile       = false
+opt.wrap           = false
 
 -- =====================================================================
 -- Clojure (settings; plugins live below in lazy.setup under the same header)
@@ -105,19 +106,35 @@ require("lazy").setup({
     },
   },
 
-  -- Syntax highlighting (pinned to master branch; main is a rewrite with a different API)
+  -- Syntax highlighting. The `main` branch is a parser installer + query set only:
+  -- no module system, and highlighting itself comes from Neovim core. Requires
+  -- Neovim 0.12+ and tree-sitter-cli (brew install tree-sitter-cli). Does not
+  -- support lazy-loading, hence lazy = false.
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
-    opts = {
-      ensure_installed = { "clojure", "lua", "vim", "vimdoc", "markdown", "bash", "json", "yaml", "regex" },
-      highlight = { enable = true },
-      indent    = { enable = true },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+    config = function()
+      require("nvim-treesitter").install({
+        "clojure", "lua", "vim", "vimdoc", "markdown", "markdown_inline",
+        "bash", "json", "yaml", "regex", "sql",
+      })
+
+      -- Parser names are not filetypes: vimdoc -> help, bash -> sh.
+      -- markdown_inline and regex are injected only, never a buffer's filetype.
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "clojure", "lua", "vim", "help", "markdown", "sh", "bash", "json", "yaml", "sql" },
+        callback = function() vim.treesitter.start() end,
+      })
     end,
+  },
+
+  -- Browser-based markdown preview
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = "markdown",
+    build = function() vim.fn["mkdp#util#install"]() end,
   },
 
   -- LSP. clojure-lsp installed via Homebrew (on PATH).
@@ -154,6 +171,13 @@ require("lazy").setup({
       })
       require("telescope").load_extension("file_browser")
     end,
+  },
+
+  {
+    "junegunn/vim-easy-align",
+    keys = {
+      { "ga", "<Plug>(EasyAlign)", mode = { "n", "x" }, desc = "EasyAlign" },
+    },
   },
 
   -- ===================================================================
