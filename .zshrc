@@ -120,4 +120,5 @@ export PATH="/usr/local/opt/curl/bin:$PATH"
 # ------------------------------------------------------------
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
-source $HOME/.nurc
+# Source nucli environment (managed by Jamf)
+[ -f "${HOME}/.nurc" ] && source "${HOME}/.nurc"
